@@ -6,6 +6,7 @@ namespace Genetic_Algorithm
 {
     public partial class Form1 : Form
     {
+        bool isAdded = false;
         int populationSize;
         int chromosomeLenght;
         double crossOverRate;
@@ -34,13 +35,14 @@ namespace Genetic_Algorithm
 
                 dataGridView1.ColumnCount = bestSolutionParams.Count;
 
-                if(dataGridView1.Rows.Count == 0)
+                if (!isAdded)
                 {
                     dataGridView1.Rows.Add();
                     dataGridView1.Rows.Add();
                 }
-               
 
+                isAdded = true; 
+               
 
                 for (int i = 0; i < bestSolutionParams.Count; i++)
                 {
@@ -64,7 +66,7 @@ namespace Genetic_Algorithm
 
                 for (int i = 0; i < geneticAlgorithm.bestSolutionsForIndividualGenerations.Count; i++)
                 {
-                    chart1.Series["Convergence"].Points.AddXY(i, geneticAlgorithm.bestSolutionsForIndividualGenerations[i]);
+                    chart1.Series["Convergence"].Points.AddXY(i+1, geneticAlgorithm.bestSolutionsForIndividualGenerations[i]);
                 }
 
                 /*foreach (var item in geneticAlgorithm.bestSolutionsForIndividualGenerations)
