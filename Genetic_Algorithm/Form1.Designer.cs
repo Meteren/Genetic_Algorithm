@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             dataGridView1 = new DataGridView();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
@@ -46,6 +46,7 @@
             label6 = new Label();
             button1 = new Button();
             chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            label7 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             SuspendLayout();
@@ -175,21 +176,30 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            chart1.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            chart1.Legends.Add(legend2);
             chart1.Location = new Point(297, 221);
             chart1.Name = "chart1";
             chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Convergence";
-            chart1.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "Convergence";
+            chart1.Series.Add(series2);
             chart1.Size = new Size(375, 305);
             chart1.TabIndex = 14;
             chart1.Text = "chart1";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(358, 603);
+            label7.Name = "label7";
+            label7.Size = new Size(329, 20);
+            label7.TabIndex = 15;
+            label7.Text = "Press enter after every input of given parameters";
             // 
             // Form1
             // 
@@ -197,6 +207,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(717, 632);
+            Controls.Add(label7);
             Controls.Add(chart1);
             Controls.Add(button1);
             Controls.Add(label6);
@@ -237,5 +248,6 @@
         private Label label6;
         private Button button1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private Label label7;
     }
 }

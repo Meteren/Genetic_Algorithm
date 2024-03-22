@@ -31,10 +31,15 @@ namespace Genetic_Algorithm
                 bestSolutionParams.Add(geneticAlgorithm.FitnessFunction(bestSolutionParams.ToArray<double>()));
 
 
+
                 dataGridView1.ColumnCount = bestSolutionParams.Count;
 
-                dataGridView1.Rows.Add();
-                dataGridView1.Rows.Add();
+                if(dataGridView1.Rows.Count == 0)
+                {
+                    dataGridView1.Rows.Add();
+                    dataGridView1.Rows.Add();
+                }
+               
 
 
                 for (int i = 0; i < bestSolutionParams.Count; i++)
@@ -56,19 +61,26 @@ namespace Genetic_Algorithm
 
                 }
 
+
                 for (int i = 0; i < geneticAlgorithm.bestSolutionsForIndividualGenerations.Count; i++)
                 {
                     chart1.Series["Convergence"].Points.AddXY(i, geneticAlgorithm.bestSolutionsForIndividualGenerations[i]);
                 }
 
+                /*foreach (var item in geneticAlgorithm.bestSolutionsForIndividualGenerations)
+                {
+                    MessageBox.Show(item.ToString());
+                }*/
+                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
 
-            
+
             textBox1.Enabled = true;
             textBox2.Enabled = true;
             textBox3.Enabled = true;
@@ -93,7 +105,7 @@ namespace Genetic_Algorithm
                     {
                         MessageBox.Show(error.Message.ToString() + " " + "Try Again.");
                     }
-                   
+
                 }
             }
         }
@@ -143,7 +155,7 @@ namespace Genetic_Algorithm
                     }
 
                 }
-                
+
             }
         }
 
@@ -162,13 +174,13 @@ namespace Genetic_Algorithm
                     {
                         MessageBox.Show("Enter a value between 0 and 1.");
                     }
-                    
+
                 }
-                catch(Exception error)
+                catch (Exception error)
                 {
                     MessageBox.Show(error.Message.ToString() + " " + "Try Again.");
                 }
-                              
+
             }
         }
 
@@ -189,7 +201,7 @@ namespace Genetic_Algorithm
                         {
                             MessageBox.Show("Enter a value between 0 and 1.");
                         }
-                        
+
                     }
                     catch (Exception error)
                     {
@@ -197,7 +209,7 @@ namespace Genetic_Algorithm
                     }
 
                 }
-                
+
             }
         }
 
@@ -214,7 +226,7 @@ namespace Genetic_Algorithm
                 {
                     MessageBox.Show(error.Message.ToString() + " " + "Try Again.");
                 }
-               
+
             }
         }
 
