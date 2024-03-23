@@ -4,8 +4,18 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Genetic_Algorithm
 {
+   
     public partial class Form1 : Form
     {
+        private class ZoomFrame
+        {
+            public double XStart { get; set; }
+            public double XFinish { get; set; }
+            public double YStart { get; set; }
+            public double YFinish { get; set; }
+        }
+
+
         bool isAdded = false;
         int populationSize;
         int chromosomeLenght;
@@ -13,10 +23,14 @@ namespace Genetic_Algorithm
         double mutationRate;
         double elitismRate;
         int generationAmount;
+        
+        
+        
         public Form1()
         {
             InitializeComponent();
-
+            chart1.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            chart1.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
         }
 
         private void start_Click(object sender, EventArgs e)
@@ -69,19 +83,19 @@ namespace Genetic_Algorithm
                     chart1.Series["Convergence"].Points.AddXY(i+1, geneticAlgorithm.bestSolutionsForIndividualGenerations[i]);
                 }
 
+                
+
                 /*foreach (var item in geneticAlgorithm.bestSolutionsForIndividualGenerations)
                 {
                     MessageBox.Show(item.ToString());
                 }*/
-                
+
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
-
 
             textBox1.Enabled = true;
             textBox2.Enabled = true;
@@ -230,6 +244,53 @@ namespace Genetic_Algorithm
                 }
 
             }
+        }
+
+        private readonly Stack<ZoomFrame> _zoomFrames = new Stack<ZoomFrame>();
+        private void chart1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            var chart = (Chart)sender;
+            var xAxis = chart.ChartAreas[0].AxisX;
+            var yAxis = chart.ChartAreas[0].AxisY;
+
+            try
+            {
+                if (e.Delta < 0)
+                {
+                    if (0 < _zoomFrames.Count)
+                    {
+                        var frame = _zoomFrames.Pop();
+                        if (_zoomFrames.Count == 0)
+                        {
+                            xAxis.ScaleView.ZoomReset();
+                            yAxis.ScaleView.ZoomReset();
+                        }
+                        else
+                        {
+                            xAxis.ScaleView.Zoom(frame.XStart, frame.XFinish);
+                            yAxis.ScaleView.Zoom(frame.YStart, frame.YFinish);
+                        }
+                    }
+                }
+                else if (e.Delta > 0)
+                {
+                    var xMin = xAxis.ScaleView.ViewMinimum;
+                    var xMax = xAxis.ScaleView.ViewMaximum;
+                    var yMin = yAxis.ScaleView.ViewMinimum;
+                    var yMax = yAxis.ScaleView.ViewMaximum;
+
+                    _zoomFrames.Push(new ZoomFrame { XStart = xMin, XFinish = xMax, YStart = yMin, YFinish = yMax });
+
+                    var posXStart = xAxis.PixelPositionToValue(e.Location.X) - (xMax - xMin) / 4;
+                    var posXFinish = xAxis.PixelPositionToValue(e.Location.X) + (xMax - xMin) / 4;
+                    var posYStart = yAxis.PixelPositionToValue(e.Location.Y) - (yMax - yMin) / 4;
+                    var posYFinish = yAxis.PixelPositionToValue(e.Location.Y) + (yMax - yMin) / 4;
+
+                    xAxis.ScaleView.Zoom(posXStart, posXFinish);
+                    yAxis.ScaleView.Zoom(posYStart, posYFinish);
+                }
+            }
+            catch { }
         }
 
     }

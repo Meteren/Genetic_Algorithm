@@ -191,6 +191,7 @@
             chart1.Size = new Size(375, 305);
             chart1.TabIndex = 14;
             chart1.Text = "chart1";
+            chart1.MouseWheel += chart1_MouseWheel;
             // 
             // label7
             // 
